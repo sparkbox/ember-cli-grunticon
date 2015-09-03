@@ -1,25 +1,40 @@
-# Ember-cli-grunticon
+# ember-cli-grunticon
 
-This README outlines the details of collaborating on this Ember addon.
+[ember-cli][ember-cli] addon integrating [grunticon][grunticon] into the
+ember build lifecycle.
 
-## Installation
+## Usage
 
-* `git clone` this repository
-* `npm install`
-* `bower install`
+### Install
+```shell
+ember install ember-cli-grunticon
+```
 
-## Running
+### Configure
 
-* `ember server`
-* Visit your app at http://localhost:4200.
+Configure grunticon in your application's `ember-cli-build.js` file.  For
+details, see the [`grunticon docs`][grunticon-docs] for details.
 
-## Running Tests
+```javascript
+// ember-cli-build.js
+var app = new EmberApp(defaults, {
+  // ...
+  grunticon: {
+    myIcons: {
+      files: [{
+        expand: true,
+        cwd: 'example/source',
+        src: ['*.svg', '*.png'],
+        dest: "example/output"
+      }],
+      options: {
+      }
+    }
+  }
+  // ...
+});
+```
 
-* `ember test`
-* `ember test --server`
-
-## Building
-
-* `ember build`
-
-For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
+[ember-cli]: https://ember-cli.com
+[grunticon]: https://github.com/filamentgroup/grunticon
+[grunticon-docs]: https://github.com/filamentgroup/grunticon#required-configuration-properties
