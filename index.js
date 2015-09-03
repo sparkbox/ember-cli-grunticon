@@ -1,11 +1,7 @@
 /* jshint node: true */
 'use strict';
 var grunt = require('grunt');
-var chalk = require('chalk');
 var defaults = require('lodash').defaults;
-var error = chalk.red,
-    warn = chalk.orange,
-    success = chalk.green;
 
 var DEFAULT_CONFIG = {};
 
