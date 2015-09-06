@@ -20,16 +20,8 @@ details, see the [`grunticon docs`][grunticon-docs] for details.
 var app = new EmberApp(defaults, {
   // ...
   grunticon: {
-    myIcons: {
-      files: [{
-        expand: true,
-        cwd: 'example/source',
-        src: ['*.svg', '*.png'],
-        dest: "example/output"
-      }],
-      options: {
-      }
-    }
+    src: "grunticon/src/+(*.svg|*.png)",
+    dest: 'public/grunticon'
   }
   // ...
 });
