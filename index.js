@@ -1,7 +1,9 @@
 /* jshint node: true */
 'use strict';
-var grunt = require('grunt');
+var Grunticon = require( 'grunticon-lib' );
 var defaults = require('lodash').defaults;
+var glob = require('glob');
+var RSVP = require('rsvp');
 
 var DEFAULT_CONFIG = {};
 
@@ -19,15 +21,29 @@ module.exports = {
     return config;
   },
   preBuild: function(result) {
-
-    grunt.task.init = function() {};
-
     var config = this.project.config(process.env.EMBER_ENV || 'development').grunticon;
 
-    grunt.initConfig( {grunticon: config} );
-    grunt.loadNpmTasks('grunt-grunticon');
+    var srcPattern = config.src || "grunticon/src/+(*.svg|*.png)";
+    var dest = config.dest || "public/grunticon";
+    var options = { enhanceSVG: true };
 
-    grunt.tasks(['grunticon']);
+    var promise = new RSVP.Promise(function(resolve, reject) {
+
+      try {
+        var files = glob.sync(srcPattern, null);
+
+        var grunticon = new Grunticon( files, dest, options );
+
+        grunticon.process(function() {
+          resolve();
+        });
+      }
+      catch(err) {
+        reject(error);
+      }
+    });
+
+    return promise;
   }
 };
 
